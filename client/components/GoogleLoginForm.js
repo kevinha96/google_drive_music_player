@@ -26,11 +26,14 @@ class GoogleLoginForm extends React.Component {
 
     // Load Google api Javascript libraries 
     start = () => {
-        window.gapi.load('client:auth2', this.initClient);
+
+        if (!gapi.auth2) window.gapi.load('client:auth2', this.initClient)
     }
 
     // Once login button is clicked, log in google user and connect to google api
     handleLoginClick = () => {
+	    console.log('GoogleLoginForm.handleLoginClick')
+
         this.props.loginActions.loggingInUser();
         gapi.auth2.getAuthInstance().signIn({prompt: 'select_account'});
     }
