@@ -154,7 +154,7 @@ module.exports = {
     },
     // Adding songs to local database
     addLocalSong: function addLocalSong(attr) {
-        var endpoint;
+        let endpoint;
         endpoint = API.LOCAL_PLAYLIST + 'add/';
         return dispatch => {
             return fetch(endpoint, API.POST_CONFIG(attr))
@@ -170,7 +170,7 @@ module.exports = {
     },
     // Deleting songs from local database
     deleteLocalSong: function deleteLocalSong(attr) {
-        var endpoint;
+        let endpoint;
         endpoint = API.LOCAL_PLAYLIST + 'delete/';
         return dispatch => {
             return fetch(endpoint, API.POST_CONFIG(attr))
@@ -208,7 +208,7 @@ module.exports = {
 /********** Custom Playlists **********/
     // Get full list of playlists
     getPlaylists: function getPlaylists(attr) {
-        var endpoint;
+        let endpoint;
         endpoint = API.PLAYLIST + 'user/' + attr.userId + '/';
         return dispatch => {
             return fetch(endpoint, API.POST_CONFIG(attr))
@@ -224,7 +224,7 @@ module.exports = {
     },
     // Make new playlist
     createNewPlaylist: function createNewPlaylist(attr) {
-        var endpoint;
+        let endpoint;
         endpoint = API.PLAYLIST + attr.name + '/';
         return dispatch => {
             return fetch(endpoint, API.PUT_CONFIG(attr))
@@ -240,7 +240,7 @@ module.exports = {
     },
     // Get music of selected playlist
     getPlaylistSongs: function getPlaylistSongs(attr) {
-        var endpoint;
+        let endpoint;
         endpoint = API.PLAYLIST + attr.playlistId + '/';
         return dispatch => {
             return fetch(endpoint, API.POST_CONFIG(attr))
@@ -256,7 +256,7 @@ module.exports = {
     },
     // Add music to playlist
     addToPlaylist: function addToPlaylist(attr) {
-        var endpoint;
+        let endpoint;
         endpoint = API.PLAYLIST + attr.playlistId + '/add/';
         return dispatch => {
             return fetch(endpoint, API.POST_CONFIG(attr))
@@ -272,7 +272,7 @@ module.exports = {
     },
     // Delete music from playlist
     deleteFromPlaylist: function deleteFromPlaylist(attr) {
-        var endpoint;
+        let endpoint;
         endpoint = API.PLAYLIST + attr.playlistId + '/delete/';
         return dispatch => {
             return fetch(endpoint, API.POST_CONFIG(attr))

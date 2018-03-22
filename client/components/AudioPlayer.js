@@ -6,7 +6,7 @@
 
 import React from 'react';
 
-var _ = require('lodash');
+let _ = require('lodash');
 
 // React wrapper for HTML 5 audio tag
 import ReactAudioPlayer from 'react-audio-player';
@@ -28,10 +28,10 @@ class AudioPlayer extends React.Component {
 
     // Play previous song
     /*handlePrevSong = () => {
-        var { song, playlistActions } = this.props;
-        var newIndex = song.prevSongIndex + 1;
+        let { song, playlistActions } = this.props;
+        let newIndex = song.prevSongIndex + 1;
         console.log(song.prevSongs[song.prevSongs.length -newIndex]);
-        var attr = {
+        let attr = {
                 songLocation: "history",
                 song: song.prevSongs[song.prevSongs.length -newIndex],
                 prevSongIndex: newIndex,
@@ -40,16 +40,16 @@ class AudioPlayer extends React.Component {
         playlistActions.selectSong(attr);
     }*/
 
-    // Play next song when song ends or next song is clicked
+    // - Play next song when song ends or next song is clicked
     handleNextSong = () => {
-        var { playlist, playlistActions, song } = this.props;
+        let { playlist, playlistActions, song } = this.props;
 
         // If not playing from history
         if (song.prevSongIndex < 2) {
             // If queue is not empty 
             if (playlist.queue.length > 0) {
-                var nextSong = playlist.queue[0];
-                var attr = {
+                let nextSong = playlist.queue[0];
+                let attr = {
                     songLocation: "queue",
                     song: nextSong,
                     prevSong: {id: song.id, name: song.currentSong, url: song.currentSongUrl},
@@ -58,9 +58,9 @@ class AudioPlayer extends React.Component {
                 playlistActions.selectSong(attr);
                 playlistActions.rearrangeQueue(nextSong);
             } else { // If queue is empty play next song from custom or local playlist
-                var idArray; var i; var attr;
+                let idArray; let i; let attr;
 
-                if (song.songLocation == "local") {
+                if (song.songLocation === "local") {
                     idArray = _.map(playlist.songs, 'id');
                     i = _.indexOf(idArray, song.id);
 
@@ -74,7 +74,7 @@ class AudioPlayer extends React.Component {
                         }
                         playlistActions.selectSong(attr);
                     }
-                } else if (song.songLocation == "custom") {
+                } else if (song.songLocation === "custom") {
                     idArray = _.map(playlist.playlistSongs, 'id');
                     i = _.indexOf(idArray, song.id);
                     
@@ -91,9 +91,9 @@ class AudioPlayer extends React.Component {
                 }
             }
         } else {
-            var newIndex = song.prevSongIndex - 1;
+            let newIndex = song.prevSongIndex - 1;
 
-            var attr = {
+            let attr = {
                     songLocation: "history",
                     song: song.prevSongs[song.prevSongs.length -newIndex],
                     prevSongIndex: newIndex,
@@ -104,12 +104,12 @@ class AudioPlayer extends React.Component {
     }
 
     render() {
-    	var { song } = this.props;
-        var prev = '<';
-        var next = '>';
+    	let { song } = this.props;
+        let prev = '<';
+        let next = '>';
 
         return (
-            <Navbar fluid fixedBottom>
+            <div>
                 <Navbar.Text className={css(styles.song)}>Currently Playing: {song.currentSong}</Navbar.Text><br /><br />
 
                 <Button className={css(styles.button)} disabled onClick={this.handlePrevSong}>{prev}</Button>
@@ -118,12 +118,13 @@ class AudioPlayer extends React.Component {
                 <div className={css(styles.player)}>
                     <ReactAudioPlayer
                         className={css(styles.controls)}
-                        src={song.currentSongUrl} 
+                        src={song.currentSongUrl}
                         controls
-                        autoPlay 
-                        onEnded={this.handleNextSong} /> 
+                        autoPlay
+                        onEnded={this.handleNextSong}
+                    />
                 </div>
-            </Navbar>
+            </div>
             
         );
     } 
@@ -140,7 +141,7 @@ const styles = StyleSheet.create({
         float: 'left'
     },
     controls: {
-        width: '100%'
+        // width: '100%'
     },
     song: {
         margin: '5px'

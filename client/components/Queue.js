@@ -19,7 +19,7 @@ class Queue extends React.Component {
 
 	// Play song and delete that song from queue
 	handleClick = (song) => {
-		var attr = {
+		let attr = {
                 songLocation: "queue",
                 song: song,
                 prevSong: (({ id, currentSong, currentSongUrl }) => ({ id, currentSong, currentSongUrl }))(this.props.song),
@@ -35,7 +35,7 @@ class Queue extends React.Component {
 	}
 
 	render() {
-		var { queue, handlePlaylistButton } = this.props;
+		let { queue, handlePlaylistButton } = this.props;
 
 		return (
 			<div className={css(styles.tab)}> 

@@ -58,7 +58,7 @@ class PlayerPage extends React.Component {
             browserHistory.push('/Login');
             return null; // For some reason this is getting ignored
         } else {
-            var attr = {userId: this.props.user.id}; 
+            let attr = {userId: this.props.user.id};
             this.props.playlistActions.getLocalSongs(attr);
             this.props.playlistActions.getPlaylists(attr);
         }
@@ -74,13 +74,13 @@ class PlayerPage extends React.Component {
     // Handles creating new playlist for the TabBar dropdown new playlist modal
     handleCreatePlaylist = () => {
         // Make new playlist
-        var attr = {
+        let attr = {
             name: this.state.newPlaylistName,
             user_id: this.props.user.id,
         }
         this.props.playlistActions.createNewPlaylist(attr).then((json) => {
             this.props.playlistActions.clearPlaylistSongs();
-            var playlist = json.playlists;
+            let playlist = json.playlists;
             
             this.setState({
                 playlist: 'playlist',
@@ -108,7 +108,7 @@ class PlayerPage extends React.Component {
 
     // Handle playlist click in dropdown in TabBar
     handleDropdownPlaylistClick = (playlist) => {
-        var attr = {
+        let attr = {
             playlistId: playlist.id
         }
         this.props.playlistActions.getPlaylistSongs(attr).then(() => {
@@ -134,15 +134,15 @@ class PlayerPage extends React.Component {
 
     // Validation State for search bar
     getValidationState = (playlists) => {
-        var newName = this.state.newPlaylistName;
-        var unique = _.filter(playlists, ['name', newName]);
+        let newName = this.state.newPlaylistName;
+        let unique = _.filter(playlists, ['name', newName]);
 
         if (newName.length > 0 && unique.length == 0) {return 'success'}
         else {return 'error'}
     }
 
     render() {
-        var { playlist, playlistActions, loginActions, user, song } = this.props;
+        let { playlist, playlistActions, loginActions, user, song } = this.props;
 
         // Returning null again when the user is not logged in because the return statement is getting ignored in componentWillMount for some reason
         if (user.isLoggedIn == false) {
